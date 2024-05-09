@@ -45,6 +45,28 @@ public class InsertUser {
 
 
 
+    public User getUser(String username, String password) {
+        String sql = "SELECT * FROM users WHERE user_name = ? AND password = ?";
+        try (Connection conn = this.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    String email = rs.getString("email");
+                    String phoneNumber = rs.getString("phone_number");
+                    return new User(username, password, email, phoneNumber);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+
+
    public boolean authenticate(String username, String password) {
     String sql = "SELECT * FROM users WHERE user_name = ? AND password = ?";
 

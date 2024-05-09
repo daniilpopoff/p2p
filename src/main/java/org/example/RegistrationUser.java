@@ -2,19 +2,25 @@ package org.example;
 
 import java.sql.*;
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class RegistrationUser {
     private static User currentUser;
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationUser.class);
 
 
+    public static User getCurrentUser() {
+        if (currentUser != null) {
+            logger.info("Current user retrieved: " );
+        } else {
+            logger.info("No user is currently logged in.");
+        }
+        return currentUser;
+    }
 
-public static void main(String[] args) {
-    registerUser();
 
-}
-
-
-public static void registerUser() {
+    public static void registerUser() {
 
     Scanner scanner = new Scanner(System.in);
     System.out.println("Please enter your username: ");
@@ -42,8 +48,6 @@ public static void registerUser() {
         System.out.println(e.getMessage());
     }
 
-
-
     InsertUser app = new InsertUser();
     app.insert(username, email, phoneNumber, password);
 }
@@ -55,32 +59,17 @@ public static void registerUser() {
         System.out.println("Enter password: ");
         String password = scanner.nextLine();
 
-        // Simulate login by checking with a database or a simple check if username and password match
-        if (authenticate(username, password)) {
-            currentUser = new User(username, password); // Set the logged user
+        InsertUser app = new InsertUser();
+        User user = app.getUser(username, password) ;
+        if (user != null ) {
+            currentUser = user; // Set the logged user
             System.out.println("Login successful!");
         } else {
             System.out.println("Login failed, try again.");
         }
     }
 
-    public boolean authenticate(String username, String password) {
-        String sql = "SELECT * FROM users WHERE user_name = ? AND password = ?";
 
-        try (Connection conn = this.connect();
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, username);
-            pstmt.setString(2, password);
-
-            try (ResultSet rs = pstmt.executeQuery()) {
-                // if the result set is not empty, user is authenticated
-                return rs.next();
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return false;
-    }
 
 
 }
