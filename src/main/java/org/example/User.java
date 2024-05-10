@@ -8,7 +8,7 @@ public class User {
     private String phone_number;
 
 
-    public User(String user_name, String email, String password, String phone_number) {
+    public User(int id, String user_name, String email, String password, String phone_number) {
         this.user_name = user_name;
         this.email = email;
         this.password = password;
@@ -18,5 +18,8 @@ public class User {
         return user_name;
     }
 
+    public int getUserId(){//TODO надо написать какойто код который вытаскивает id нынешнего юзера из бд
+
+    }
 
 }

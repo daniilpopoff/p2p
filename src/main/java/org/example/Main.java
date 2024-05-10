@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Scanner;
 
+import static org.example.OrderManagement.createOrder;
 import static org.example.RegistrationUser.*;
 
 public class Main {
@@ -39,6 +40,10 @@ public class Main {
                     break;
                 case "login":
                     loginUser();
+                    break;
+                case "new order":
+                    createOrder(); //как вытащить id user
+
                 default:
                     System.out.println("Unknown command. Type 'help' for a list of commands.");
                     break;

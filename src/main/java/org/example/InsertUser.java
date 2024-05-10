@@ -54,9 +54,10 @@ public class InsertUser {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
+                    int id = rs.getInt("id ");
                     String email = rs.getString("email");
                     String phoneNumber = rs.getString("phone_number");
-                    return new User(username, password, email, phoneNumber);
+                    return new User(id, username, password, email, phoneNumber);
                 }
             }
         } catch (SQLException e) {
