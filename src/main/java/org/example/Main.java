@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.Scanner;
 
+
 import static org.example.OrderManagement.createOrder;
 import static org.example.RegistrationUser.*;
 
@@ -9,6 +10,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
+
 
         while (true) {
             if (getCurrentUser() != null) {
@@ -35,15 +37,18 @@ public class Main {
                 case "help view_orders":
                     Help.showViewOrdersHelp();
                     break;
-                case "register ":
+                case "register":
                     registerUser();
                     break;
                 case "login":
                     loginUser();
                     break;
-                case "new order":
-                    createOrder(); //как вытащить id user
-
+                case "norder":
+                    InsertUser userFromDB = new InsertUser();
+                    createOrder(userFromDB.getUserIdByEmail(getCurrentUser()),
+                            "USDT",
+                            850); //как вытащить id user
+                    break;
                 default:
                     System.out.println("Unknown command. Type 'help' for a list of commands.");
                     break;

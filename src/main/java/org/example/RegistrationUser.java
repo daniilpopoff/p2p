@@ -4,6 +4,8 @@ import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+
+
 public class RegistrationUser {
     private static User currentUser;
     private static final Logger logger = LoggerFactory.getLogger(RegistrationUser.class);
@@ -36,7 +38,7 @@ public class RegistrationUser {
 //            registerUser();
         }
         else{
-            currentUser = new User(id, username, password, email, phoneNumber);
+            currentUser = new User( username, password, email, phoneNumber);//todo make function to take user id
             System.out.println("You have successfully registered!");
         }
     }

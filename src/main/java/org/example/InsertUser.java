@@ -54,10 +54,10 @@ public class InsertUser {
 
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    int id = rs.getInt("id ");
+
                     String email = rs.getString("email");
                     String phoneNumber = rs.getString("phone_number");
-                    return new User(id, username, password, email, phoneNumber);
+                    return new User(username, password, email, phoneNumber);
                 }
             }
         } catch (SQLException e) {
@@ -85,5 +85,23 @@ public class InsertUser {
     }
     return false;
 }
+    public int getUserIdByEmail( User user) {
+        String sql = "SELECT id FROM Users WHERE email = ?";
+        Connection conn = this.connect();
+
+
+        try (PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setString(1, user.getEmail());  // Use email to identify the user
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("id");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error retrieving user ID: " + e.getMessage());
+        }
+        return -1;  // Return -1 if the user is not found or if an error occurs
+    }
+
 
 }
