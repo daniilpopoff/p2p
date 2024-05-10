@@ -1,8 +1,11 @@
 package org.example;
 
+import java.util.List;
 import java.util.Scanner;
 
 
+import static org.example.InsertOrder.getCreatorPhoneNumber;
+import static org.example.InsertOrder.getLastFiveOrders;
 import static org.example.OrderManagement.createOrder;
 import static org.example.RegistrationUser.*;
 
@@ -43,12 +46,28 @@ public class Main {
                 case "login":
                     loginUser();
                     break;
-                case "norder":
+                case "neworder":
                     InsertUser userFromDB = new InsertUser();
-                    createOrder(userFromDB.getUserIdByEmail(getCurrentUser()),
+                    Order order = createOrder(userFromDB.getUserIdByEmail(getCurrentUser()),
                             "USDT",
-                            850); //как вытащить id user
+                            850);
+                    order.printOrderDetails(); //как вытащить id user
                     break;
+
+                case "listorders":
+                    List<Order> lastFiveOrders = getLastFiveOrders();
+                    lastFiveOrders.forEach(orderlist -> {
+                        System.out.println("Order ID: " + orderlist.getOrderId());
+                        orderlist.printOrderDetails();
+                    });
+                    break;
+
+                case "buyorder":
+                    System.out.println("Input order id you are want to buy:");
+                    int idOrder = scanner.nextInt();
+                    getCreatorPhoneNumber(idOrder);
+                    System.out.println("You can connect with this person and deal about purchase ");
+
                 default:
                     System.out.println("Unknown command. Type 'help' for a list of commands.");
                     break;

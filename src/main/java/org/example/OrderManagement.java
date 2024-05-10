@@ -17,7 +17,7 @@ public class OrderManagement {
         double pricePerCoin = getCoinPrice(coinName);  // 1 USDT = 91 som
         double totalQuantity = fiatAmount / pricePerCoin;  // Calculate how many USDTs can be bought
         double fee = calculateFee(fiatAmount);  // Assuming there's a method to calculate fees
-        double reserveQuantity = totalQuantity - fee;
+        double reserveQuantity = fiatAmount - fee;
         // Assuming we have a method to get the next order ID from the database or memory
         int orderId = getNextOrderId();
 
@@ -36,6 +36,7 @@ public class OrderManagement {
                 false,  // DidOrderMakerPay
                 false   // IsOrderSuccess
         );
+
 
         // Assuming there's a method to save the order to a database
         InsertOrder newOrder = new InsertOrder();
@@ -70,5 +71,10 @@ public class OrderManagement {
         }
         return coinPrice;
     }
+
+
+
+
+
 }
 

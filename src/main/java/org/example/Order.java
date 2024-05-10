@@ -74,4 +74,19 @@ public class Order {
 
     public boolean isOrderSuccess() { return isOrderSuccess; }
     public void setOrderSuccess(boolean isOrderSuccess) { this.isOrderSuccess = isOrderSuccess; }
+
+
+    public void printOrderDetails() {
+        System.out.printf("%-20s %s\n", "Attribute", "Value");
+        System.out.printf("%-20s %s\n", "----------", "-----");
+        System.out.printf("%-20s %s\n", "Coin Name:", coinName);
+        System.out.printf("%-20s %.2f SOM\n", "Price Per Coin:", pricePerCoin);
+        System.out.printf("%-20s %.2f SOM\n", "Fiat Amount:", fiatAmountToBuy);
+        System.out.printf("%-20s %.2f\n", "Reserved Quantity:", reserveQuantity);
+        System.out.printf("%-20s %.2f\n", "Total Quantity:", totalQuantity);
+        System.out.printf("%-20s %.2f SOM\n", "Fee:", fee);
+        System.out.printf("%-20s %s\n", "Payment Method:", paymentMethod);
+    }
+
+
 }
