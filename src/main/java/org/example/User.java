@@ -9,6 +9,7 @@ public class User {
 
 
     public User(String user_name, String email, String password, String phone_number) {
+
         this.user_name = user_name;
         this.email = email;
         this.password = password;
@@ -17,6 +18,13 @@ public class User {
     public String getUser_name() {
         return user_name;
     }
+    public String getEmail(){
+        return email;
+    }
+
+//    public int getUserId(){//TODO надо написать какойто код который вытаскивает id нынешнего юзера из бд
+//
+//    }
 
 
 }

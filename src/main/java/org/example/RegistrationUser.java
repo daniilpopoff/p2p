@@ -1,9 +1,10 @@
 package org.example;
 
-import java.sql.*;
 import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+
 
 public class RegistrationUser {
     private static User currentUser;
@@ -12,9 +13,6 @@ public class RegistrationUser {
 
     public static User getCurrentUser() {
         if (currentUser != null) {
-            logger.info("Current user retrieved: " );
-        } else {
-            logger.info("No user is currently logged in.");
         }
         return currentUser;
     }
@@ -40,7 +38,7 @@ public class RegistrationUser {
 //            registerUser();
         }
         else{
-            currentUser = new User(username, password, email, phoneNumber);
+            currentUser = new User( username, password, email, phoneNumber);//todo make function to take user id
             System.out.println("You have successfully registered!");
         }
     }
